@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<?import javafx.scene.Group?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.samir.projects.monkeykong.SettingsController"
+            styleClass="backgroundStyle"
+            prefHeight="500.0" prefWidth="500.0" >
+    <children>
+        <Group fx:id="layer" ></Group>
+    </children>
+    <stylesheets>
+        <URL value="@styleSheet.css" />
+    </stylesheets>
+</AnchorPane>
