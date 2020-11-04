@@ -14,10 +14,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class PrimaryViewController {
+public class MainViewController {
 
     @FXML public VBox primaryView;
     @FXML public ImageView donkeyKongImageView;
+
+    public static int GAME_WINDOW_WIDTH;
+    public static int GAME_WINDOW_HEIGHT;
 
     @FXML
     public void initialize() {
@@ -48,14 +51,18 @@ public class PrimaryViewController {
 
     public void startGame(ActionEvent actionEvent) {
         DonkeyKongGameApp.primaryStage.hide();
+
+        GAME_WINDOW_WIDTH = SettingsViewController.X_EDGE_NUMBER * SettingsViewController.EDGE_SIZE;
+        GAME_WINDOW_HEIGHT = SettingsViewController.Y_EDGE_NUMBER * SettingsViewController.EDGE_SIZE;
+
         try {
-            Stage gameStage = new Stage();
 
             FXMLLoader fxmlLoader = new FXMLLoader(DonkeyKongGameApp.class.getResource("gameView.fxml"));
             Parent gameLayer = fxmlLoader.load();
             GameViewController gameViewController = fxmlLoader.<GameViewController>getController();
 
-            gameStage.setScene(new Scene(gameLayer,SettingsViewController.WINDOW_WIDTH,SettingsViewController.WINDOW_HEIGHT));
+            Stage gameStage = new Stage();
+            gameStage.setScene(new Scene(gameLayer,GAME_WINDOW_WIDTH,GAME_WINDOW_HEIGHT));
             gameStage.setTitle("Donkey Kong");
             gameStage.setResizable(false);
             gameStage.initModality(Modality.APPLICATION_MODAL);

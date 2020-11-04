@@ -4,25 +4,24 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-
-<?import org.samir.projects.monkeykong.IntegerField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
+
 <GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
           fx:controller="org.samir.projects.monkeykong.SettingsViewController"
           styleClass="backgroundStyle" alignment="CENTER" hgap="20" vgap="20"
           fx:id="settingsViewPane" prefWidth="500.0" prefHeight="400.0">
     <children>
         <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="X EDGE NUMBER : " styleClass="textStyle"/>
-        <Slider fx:id="xEdgeNumber" GridPane.rowIndex="0" GridPane.columnIndex="1" min="5" max="20"/>
+        <Slider fx:id="xEdgeNumber" GridPane.rowIndex="0" GridPane.columnIndex="1" min="5" max="20" value="5"/>
         <Label fx:id="xLabel" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Y EDGE NUMBER : " styleClass="textStyle"/>
-        <Slider fx:id="yEdgeNumber" GridPane.rowIndex="1" GridPane.columnIndex="1" min="5" max="20"/>
+        <Slider fx:id="yEdgeNumber" GridPane.rowIndex="1" GridPane.columnIndex="1" min="5" max="20" value="5"/>
         <Label fx:id="yLabel" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="CORNER SIZE : " styleClass="textStyle"/>
-        <Slider fx:id="cornerSize" GridPane.rowIndex="2" GridPane.columnIndex="1" min="20" max="60"/>
+        <Slider fx:id="cornerSize" GridPane.rowIndex="2" GridPane.columnIndex="1" min="50" max="150" value="50"/>
         <Label fx:id="cornerSizeLabel" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Button fx:id="submitButton" text="Submit" onAction="#submitSettings" GridPane.rowIndex="3" styleClass="buttonStyle"/>

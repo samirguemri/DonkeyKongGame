@@ -1,7 +1,5 @@
 package org.samir.projects.monkeykong;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -24,19 +22,15 @@ public class SettingsViewController {
     public static int Y_EDGE_NUMBER = 10;
     public static int EDGE_SIZE = 50;
 
-    public static int WINDOW_WIDTH = X_EDGE_NUMBER * EDGE_SIZE;
-    public static int WINDOW_HEIGHT = Y_EDGE_NUMBER * EDGE_SIZE;
 
-    @FXML
-    public void initialize() {
+    @FXML public void initialize() {
         xEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> xLabel.setText(new DecimalFormat("#").format(newValue)));
         yEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> yLabel.setText(new DecimalFormat("#").format(newValue)));
         cornerSize.valueProperty().addListener((ov, oldValue, newValue) -> cornerSizeLabel.setText(new DecimalFormat("#").format(newValue)));
-
-        getValues();
+        extractValues();
     }
 
-    private void getValues(){
+    private void extractValues(){
         X_EDGE_NUMBER = (int) xEdgeNumber.getValue();
         Y_EDGE_NUMBER = (int) yEdgeNumber.getValue();
         EDGE_SIZE = (int) cornerSize.getValue();
@@ -47,7 +41,7 @@ public class SettingsViewController {
     }
 
     public void submitSettings(ActionEvent actionEvent) {
-        getValues();
+        extractValues();
         settingsViewPane.getScene().getWindow().hide();
         DonkeyKongGameApp.primaryStage.show();
     }

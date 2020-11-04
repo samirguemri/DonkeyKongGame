@@ -16,7 +16,7 @@ public class GameViewController {
     private int edgeSize;
 
     public GameViewController(){
-        gameViewLayer  = new Canvas(SettingsViewController.WINDOW_WIDTH,SettingsViewController.WINDOW_HEIGHT);
+        gameViewLayer  = new Canvas(MainViewController.GAME_WINDOW_WIDTH,MainViewController.GAME_WINDOW_HEIGHT);
         graphicsContext = gameViewLayer.getGraphicsContext2D();
         gameEngine = new GameEngine(50);
         edgeSize = gameEngine.edgeSize;
@@ -31,11 +31,11 @@ public class GameViewController {
         for (int i = 0; i < gameEngine.xEdgeNumber; i++) {
             for (int j = 0; j < gameEngine.yEdgeNumber; j++){
                 switch (gameEngine.DKBoard[i][j]) {
-                    case GameEngine.DONKEY_KONG: drawDonkeyKong(j,i);
+                    case GameEngine.DONKEY_KONG: drawDonkeyKong(i,j);
                         break;
-                    case GameEngine.WALL : drawWall(j,i);
+                    case GameEngine.WALL : drawWall(i,j);
                         break;
-                    case GameEngine.BANANA : drawBanana(j,i);
+                    case GameEngine.BANANA : drawBanana(i,j);
                         break;
                 }
             }
