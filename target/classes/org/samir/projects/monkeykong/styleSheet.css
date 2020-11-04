@@ -1,11 +1,21 @@
 .backgroundStyle {
-    -fx-background-color: gray;
+    -fx-background-image : url('image_mainBackground.png');
+}
+
+.gameLayerBackgroundStyle {
+    -fx-background-image : url('image_floorBackground.png');
 }
 
 .donkeyStyle {
 }
 
-.wallStyleSheet {
+.wallStyle {
+}
+
+.textStyle {
+    -fx-font-family : gameplay;
+    -fx-font-size : 13pt;
+    -fx-text-fill : blue;
 }
 
 .gameNameStyle {
@@ -17,7 +27,7 @@
 }
 
 .buttonStyle {
-    -fx-pref-width : 150px;
+    -fx-pref-width : 100px;
     -fx-height : 20px;
-    -fx-font-size : 13pt;
+    -fx-font-size : 12pt;
 }

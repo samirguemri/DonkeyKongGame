@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.samir.projects.monkeykong.GameView"
-            prefHeight="400.0" prefWidth="600.0">
+<Pane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+       styleClass="gameLayerBackgroundStyle" fx:id="gameViewPane"
+       fx:controller="org.samir.projects.monkeykong.GameViewController">
 
-
-</AnchorPane>
+    <stylesheets>
+        <URL value="@styleSheet.css" />
+    </stylesheets>
+</Pane>

@@ -14,10 +14,12 @@ import java.io.IOException;
  */
 public class DonkeyKongGameApp extends Application {
 
-    private static Scene rootScene;
+    public static Scene rootScene;
+    public static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        this.primaryStage = primaryStage;
         Font.loadFont(DonkeyKongGameApp.class.getResource("Gameplay.ttf").toExternalForm(),10);
         Parent parentLayer = loadFXML("mainView");
         rootScene = new Scene(parentLayer);
