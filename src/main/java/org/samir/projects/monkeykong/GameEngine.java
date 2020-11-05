@@ -33,12 +33,14 @@ public class GameEngine {
                 DKBoard[i][j]=0;
         }
 
-        x = random.nextInt(xEdgeNumber);
-        y = random.nextInt(yEdgeNumber);
-        DKBoard[x][y] = BANANA;
+        // Create BANANA
+        x = random.nextInt(5);
+        y = random.nextInt(5);
+        DKBoard[xEdgeNumber-x][yEdgeNumber-y] = BANANA;
 
-        x = random.nextInt(xEdgeNumber);
-        y = random.nextInt(yEdgeNumber);
+        // Create DONKEY_KONG
+        x = random.nextInt(5);
+        y = random.nextInt(5);
         DKBoard[x][y] = DONKEY_KONG;
 
         int gameCellNumber = xEdgeNumber * yEdgeNumber;

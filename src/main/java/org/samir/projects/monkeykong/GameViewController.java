@@ -1,10 +1,14 @@
 package org.samir.projects.monkeykong;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class GameViewController {
 
@@ -15,16 +19,41 @@ public class GameViewController {
     private GameEngine gameEngine;
     private int edgeSize;
 
+    private static AnimationTimer animationTimer = null;
+    public static boolean GAME_OVER = true;
+    private static Text gameOverText = null;
+
     public GameViewController(){
         gameViewLayer  = new Canvas(MainViewController.GAME_WINDOW_WIDTH,MainViewController.GAME_WINDOW_HEIGHT);
         graphicsContext = gameViewLayer.getGraphicsContext2D();
-        gameEngine = new GameEngine(50);
+        gameEngine = new GameEngine(SettingsViewController.COMPLEXITY);
         edgeSize = gameEngine.edgeSize;
     }
 
-    public void initialize(){
+    public void initialize() {
         gameViewPane.getChildren().addAll(gameViewLayer);
         initGame();
+        animationTimer = new AnimationTimer() {
+            long lastTick = 0;
+
+            @Override
+            public void handle(long now) {
+                drawFrame();
+            }
+        };
+        animationTimer.start();
+    }
+
+    private void drawFrame() {
+        if (GAME_OVER) {
+            gameOverText = new Text(100, 250,"GAME OVER");
+            gameOverText.setFill(Color.RED);
+            gameOverText.setFont(new Font("", 50));
+            gameOverText.setId("gameOverText");
+            //gameViewPane.getChildren().add(gameOverText);
+            animationTimer.stop();
+            return;
+        }
     }
 
     private void initGame() {

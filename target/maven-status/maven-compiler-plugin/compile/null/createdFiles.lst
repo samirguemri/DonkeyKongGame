@@ -2,6 +2,5 @@ org/samir/projects/monkeykong/IntegerField.class
 org/samir/projects/monkeykong/SettingsViewController.class
 module-info.class
 org/samir/projects/monkeykong/GameViewController.class
-org/samir/projects/monkeykong/PrimaryViewController.class
 org/samir/projects/monkeykong/DonkeyKongGameApp.class
 org/samir/projects/monkeykong/GameEngine.class

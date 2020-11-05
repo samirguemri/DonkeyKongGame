@@ -16,23 +16,32 @@ public class SettingsViewController {
     @FXML public Label yLabel;
     @FXML public Slider cornerSize;
     @FXML public Label cornerSizeLabel;
+    @FXML public Slider complexity;
+    @FXML public Label complexityLabel;
+
     @FXML public GridPane settingsViewPane;
 
     public static int X_EDGE_NUMBER = 10;
     public static int Y_EDGE_NUMBER = 10;
+    public static int COMPLEXITY = 20;
     public static int EDGE_SIZE = 50;
 
+    public SettingsViewController() {
+        System.out.println("SettingsViewController : " + Thread.currentThread().getName() + " is running");
+    }
 
     @FXML public void initialize() {
         xEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> xLabel.setText(new DecimalFormat("#").format(newValue)));
         yEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> yLabel.setText(new DecimalFormat("#").format(newValue)));
         cornerSize.valueProperty().addListener((ov, oldValue, newValue) -> cornerSizeLabel.setText(new DecimalFormat("#").format(newValue)));
+        complexity.valueProperty().addListener((ov,oldValue,newValue) -> complexityLabel.setText(new DecimalFormat("#").format(newValue)));
         extractValues();
     }
 
     private void extractValues(){
         X_EDGE_NUMBER = (int) xEdgeNumber.getValue();
         Y_EDGE_NUMBER = (int) yEdgeNumber.getValue();
+        COMPLEXITY = (int) complexity.getValue();
         EDGE_SIZE = (int) cornerSize.getValue();
     }
 
