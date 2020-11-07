@@ -13,19 +13,19 @@
           fx:id="settingsViewPane" prefWidth="500.0" prefHeight="400.0">
     <children>
         <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="X EDGE NUMBER : " styleClass="textStyle"/>
-        <Slider fx:id="xEdgeNumber" GridPane.rowIndex="0" GridPane.columnIndex="1" min="5" max="20" value="5"/>
+        <Slider fx:id="xEdgeNumber" GridPane.rowIndex="0" GridPane.columnIndex="1" min="5" max="20" value="10"/>
         <Label fx:id="xLabel" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Y EDGE NUMBER : " styleClass="textStyle"/>
-        <Slider fx:id="yEdgeNumber" GridPane.rowIndex="1" GridPane.columnIndex="1" min="5" max="15" value="5"/>
+        <Slider fx:id="yEdgeNumber" GridPane.rowIndex="1" GridPane.columnIndex="1" min="5" max="20" value="10"/>
         <Label fx:id="yLabel" GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="CORNER SIZE : " styleClass="textStyle"/>
-        <Slider fx:id="cornerSize" GridPane.rowIndex="2" GridPane.columnIndex="1" min="50" max="100" value="50"/>
+        <Slider fx:id="cornerSize" GridPane.rowIndex="2" GridPane.columnIndex="1" min="30" max="100" value="50"/>
         <Label fx:id="cornerSizeLabel" GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="COMPLEXITY : " styleClass="textStyle"/>
-        <Slider fx:id="complexity" GridPane.rowIndex="3" GridPane.columnIndex="1" min="10" max="60" value="20"/>
+        <Slider fx:id="complexity" GridPane.rowIndex="3" GridPane.columnIndex="1" min="20" max="60" value="40"/>
         <Label fx:id="complexityLabel" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="textStyle"/>
 
         <Button text="Submit" onAction="#submitSettings" GridPane.rowIndex="4" styleClass="buttonStyle"/>

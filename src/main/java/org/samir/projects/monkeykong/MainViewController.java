@@ -1,22 +1,15 @@
 package org.samir.projects.monkeykong;
 
 import java.io.IOException;
-import java.util.Timer;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,6 +19,7 @@ public class MainViewController {
     @FXML public VBox primaryView;
     @FXML public ImageView donkeyKongImageView;
 
+    public static Scene gameScene;
     public static int GAME_WINDOW_WIDTH;
     public static int GAME_WINDOW_HEIGHT;
 
@@ -66,7 +60,9 @@ public class MainViewController {
             GameViewController gameViewController = fxmlLoader.<GameViewController>getController();
 
             Stage gameStage = new Stage();
-            gameStage.setScene(new Scene(gameLayer,GAME_WINDOW_WIDTH,GAME_WINDOW_HEIGHT));
+            gameScene = new Scene(gameLayer,GAME_WINDOW_WIDTH,GAME_WINDOW_HEIGHT);
+            gameStage.setScene(gameScene);
+            gameViewController.keyEventListener(gameScene);
             gameStage.setTitle("Donkey Kong");
             gameStage.setResizable(false);
             gameStage.initModality(Modality.APPLICATION_MODAL);
