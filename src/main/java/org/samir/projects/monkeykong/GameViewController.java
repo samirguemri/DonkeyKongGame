@@ -25,7 +25,8 @@ public class GameViewController {
 
     private AnimationTimer animationTimer = null;
     private Direction DIRECTION = Direction.DOWN;
-    private boolean directionClicked = false;
+    private boolean directionKeyPressed = false;
+    private boolean GAME_WON = false;
     private boolean GAME_OVER = false;
     private Text gameOverText = null;
     private ImageView donkeyKong = null;
@@ -59,7 +60,7 @@ public class GameViewController {
         for (int i = 0; i < gameEngine.xEdgeNumber; i++) {
             for (int j = 0; j < gameEngine.yEdgeNumber; j++){
                 switch (gameEngine.DKBoard[i][j]) {
-                    case GameEngine.DONKEY_KONG: drawDonkeyKong(i,j);
+                    case GameEngine.DONKEY_KONG: drawDonkeyKongInitial(i,j);
                         break;
                     case GameEngine.WALL : drawWall(i,j);
                         break;
@@ -71,73 +72,127 @@ public class GameViewController {
     }
 
     private void drawFrame() {
+        if (GAME_WON) {
+            drawDonkeyKongFinal();
+            return;
+        }
+
+        if (!GAME_OVER && gameOverText != null) {
+            gameViewLayer.getChildren().remove(gameOverText);
+        }
+
         if (GAME_OVER) {
             gameViewLayer.setEffect(new GaussianBlur());
             gameOverText = new Text(100, 250,"GAME OVER");
             gameOverText.setFill(Color.RED);
             gameOverText.setFont(Font.font(null, FontWeight.BOLD, 50));
-            gameOverText.setId("gameOverText");
             gameViewPane.getChildren().add(gameOverText);
             animationTimer.stop();
             return;
         }
 
         /* Move DonkeyKong */
-        if (directionClicked) {
+        if (directionKeyPressed) {
             int x = gameEngine.dkPosition.getX();
             int y = gameEngine.dkPosition.getY();
             switch (DIRECTION) {
                 case UP:
-                    gameEngine.dkPosition.setPosition(x,y-1);
-                    removeDonkeyKong();
-                    drawDonkeyKong(x,y-1);
+                    if ( y > 0 && gameEngine.DKBoard[x][y-1] != GameEngine.WALL){
+                        gameEngine.dkPosition.setPosition(x,y-1);
+                        removeElement(donkeyKong);
+                        drawDonkeyKongGoForward(x,y-1);
+                    }
                     break;
                 case DOWN:
-                    gameEngine.dkPosition.setPosition(x,y+1);
-                    removeDonkeyKong();
-                    drawDonkeyKong(x,y+1);
+                    if ( y < gameEngine.yEdgeNumber-1 && gameEngine.DKBoard[x][y+1] != GameEngine.WALL){
+                        gameEngine.dkPosition.setPosition(x,y+1);
+                        removeElement(donkeyKong);
+                        drawDonkeyKongGoForward(x,y+1);
+                    }
                     break;
                 case LEFT:
-                    gameEngine.dkPosition.setPosition(x-1,y);
-                    removeDonkeyKong();
-                    drawDonkeyKong(x-1,y);
+                    if ( x > 0 && gameEngine.DKBoard[x-1][y] != GameEngine.WALL){
+                        gameEngine.dkPosition.setPosition(x-1,y);
+                        removeElement(donkeyKong);
+                        drawDonkeyKongLookingLeft(x-1,y);
+                    }
                     break;
                 case RIGHT:
-                    gameEngine.dkPosition.setPosition(x+1,y);
-                    removeDonkeyKong();
-                    drawDonkeyKong(x+1,y);
+                    if ( x < gameEngine.xEdgeNumber-1 && gameEngine.DKBoard[x+1][y] != GameEngine.WALL){
+                        gameEngine.dkPosition.setPosition(x+1,y);
+                        removeElement(donkeyKong);
+                        drawDonkeyKongLookingRight(x+1,y);
+                    }
                     break;
             }
-            directionClicked = false;
+            directionKeyPressed = false;
         }
+
+        /* Eating Banana */
+        if (gameEngine.dkPosition.equals(gameEngine.bananaPosition)) {
+            removeElement(banana);
+            gameEngine.bananaPosition.setPosition(-1,-1);
+            removeElement(donkeyKong);
+            gameViewLayer.setEffect(new GaussianBlur());
+            GAME_WON = true;
+        }
+
     }
 
     public void keyEventListener(Scene gameScene){
         gameScene.addEventFilter(KeyEvent.KEY_PRESSED, key -> {
             if (key.getCode() == KeyCode.UP) {
-                directionClicked = true;
+                directionKeyPressed = true;
                 DIRECTION = Direction.UP;
             }
             if (key.getCode() == KeyCode.LEFT) {
-                directionClicked = true;
+                directionKeyPressed = true;
                 DIRECTION = Direction.LEFT;
             }
             if (key.getCode() == KeyCode.DOWN) {
-                directionClicked = true;
+                directionKeyPressed = true;
                 DIRECTION = Direction.DOWN;
             }
             if (key.getCode() == KeyCode.RIGHT) {
-                directionClicked = true;
+                directionKeyPressed = true;
                 DIRECTION = Direction.RIGHT;
             }
         });
 
     }
 
-    private void drawDonkeyKong(int xPosition, int yPosition) {
+    private void drawDonkeyKongInitial(int xPosition, int yPosition) {
         Image image = new Image(DonkeyKongGameApp.class.getResourceAsStream("image_dkInitial.png"));
         donkeyKong = new ImageView(image);
         drawElement(donkeyKong,xPosition * edgeSize,yPosition * edgeSize);
+    }
+
+    private void drawDonkeyKongGoForward(int xPosition, int yPosition) {
+        Image image = new Image(DonkeyKongGameApp.class.getResourceAsStream("image_dkGoForward.png"));
+        donkeyKong = new ImageView(image);
+        drawElement(donkeyKong,xPosition * edgeSize,yPosition * edgeSize);
+    }
+
+    private void drawDonkeyKongLookingLeft(int xPosition, int yPosition) {
+        Image image = new Image(DonkeyKongGameApp.class.getResourceAsStream("image_dkLookingLeft.png"));
+        donkeyKong = new ImageView(image);
+        drawElement(donkeyKong,xPosition * edgeSize,yPosition * edgeSize);
+    }
+
+    private void drawDonkeyKongLookingRight(int xPosition, int yPosition) {
+        Image image = new Image(DonkeyKongGameApp.class.getResourceAsStream("image_dkLookingRight.png"));
+        donkeyKong = new ImageView(image);
+        drawElement(donkeyKong,xPosition * edgeSize,yPosition * edgeSize);
+    }
+
+    private void drawDonkeyKongFinal() {
+        Image image = new Image(DonkeyKongGameApp.class.getResourceAsStream("image_dkFinal.png"));
+        donkeyKong = new ImageView(image);
+        donkeyKong.setFitWidth(MainViewController.GAME_WINDOW_WIDTH/2);
+        donkeyKong.setFitHeight(MainViewController.GAME_WINDOW_HEIGHT/2);
+        donkeyKong.setX(MainViewController.GAME_WINDOW_WIDTH/4);
+        donkeyKong.setY(MainViewController.GAME_WINDOW_HEIGHT/4);
+        gameViewPane.getChildren().add(donkeyKong);
     }
 
     private void drawWall(int xPosition, int yPosition) {
@@ -160,8 +215,8 @@ public class GameViewController {
         gameViewLayer.getChildren().add(imageView);
     }
 
-    private void removeDonkeyKong(){
-        gameViewLayer.getChildren().remove(donkeyKong);
+    private void removeElement(ImageView imageView){
+        gameViewLayer.getChildren().remove(imageView);
     }
 
     public void onClose() {

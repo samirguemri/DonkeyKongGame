@@ -26,10 +26,6 @@ public class SettingsViewController {
     public static int COMPLEXITY = 20;
     public static int EDGE_SIZE = 50;
 
-    public SettingsViewController() {
-        System.out.println("SettingsViewController : " + Thread.currentThread().getName() + " is running");
-    }
-
     @FXML public void initialize() {
         xEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> xLabel.setText(new DecimalFormat("#").format(newValue)));
         yEdgeNumber.valueProperty().addListener((ov, oldValue, newValue) -> yLabel.setText(new DecimalFormat("#").format(newValue)));

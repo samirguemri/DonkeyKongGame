@@ -19,9 +19,6 @@ public class DonkeyKongGameApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-        System.out.println(Thread.currentThread().getName() + " is running");
-
         this.primaryStage = primaryStage;
         Font.loadFont(DonkeyKongGameApp.class.getResource("Gameplay.ttf").toExternalForm(),10);
         Parent parentLayer = loadFXML("mainView");
